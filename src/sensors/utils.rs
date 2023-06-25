@@ -17,7 +17,8 @@ pub fn length_in_to_mm(inch: f64) -> f64 {
 
 // Round converted floats to a specific decimal place
 // this avoids giving any false idea about metric accuracy
-fn round_to_x_places(value: f64, power: u8) -> f64 {
-    let multiplier: f64 = "10.0".pow(power);
+fn round_to_x_places(value: f64, power: u32) -> f64 {
+    let base: i64 = 10;
+    let multiplier: f64 = base.pow(power) as f64;
     f64::round(value * multiplier) / multiplier
 }
