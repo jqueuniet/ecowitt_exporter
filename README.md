@@ -20,3 +20,12 @@ This project uses [Rocket](https://rocket.rs/) as HTTP server and for now relies
 [its default settings](https://rocket.rs/v0.5-rc/guide/configuration/#default-provider). You can customize them with 
 either a Rocket.toml file or `ROCKET_` environment variables. At the very least, you will have to set ROCKET_ADDRESS to 
 listen on IP addresses other than 127.0.0.1. The default port is 8000.
+
+## Usage
+
+Ecowitt data should be sent to the default `/data/report/` URL path. Metrics can be retrieved at `/metrics`.
+
+Do note that in the event of sensor failure, like if its battery is exhausted, the station will at first keep sending 
+its last received metrics. After some time, it will declare the sensor dead and stop sending those metrics. Only at 
+this point will metrics be culled from the exporter. No attempt will be made by this program to detect the situation 
+beforehand.
