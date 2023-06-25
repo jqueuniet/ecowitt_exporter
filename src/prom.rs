@@ -125,8 +125,8 @@ pub fn new() -> PromObjects {
         .unwrap(),
         rainfall_rate_mmh: register_gauge_vec!(
             opts!(
-                "ecowitt_rainfall_rate_milimetersperhour",
-                "current rainfall rate (milimeters/hour)",
+                "ecowitt_rainfall_rate_millimetersperhour",
+                "current rainfall rate (millimeters/hour)",
             ),
             &["sensor"]
         )
@@ -137,7 +137,10 @@ pub fn new() -> PromObjects {
         )
         .unwrap(),
         rainfall_mm: register_gauge_vec!(
-            opts!("ecowitt_rainfall_milimeters", "rainfall depth (milimeters)",),
+            opts!(
+                "ecowitt_rainfall_millimeters",
+                "rainfall depth (millimeters)",
+            ),
             &["period"]
         )
         .unwrap(),
