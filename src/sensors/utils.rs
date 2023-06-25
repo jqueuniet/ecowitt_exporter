@@ -1,4 +1,3 @@
-
 pub fn temp_f_to_c(f: f64) -> f64 {
     round_to_x_places((f - 32.0) / 1.8, 1)
 }

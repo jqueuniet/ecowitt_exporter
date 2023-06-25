@@ -1,5 +1,5 @@
-use prometheus::{IntGaugeVec, opts, register_gauge_vec, register_int_gauge_vec};
 use prometheus::core::{AtomicF64, GenericGaugeVec};
+use prometheus::{opts, register_gauge_vec, register_int_gauge_vec, IntGaugeVec};
 
 pub struct PromObjects {
     // Only Vec variants of gauges are used since the others can't be easily removed
@@ -35,74 +35,111 @@ pub struct PromObjects {
 }
 
 pub fn new() -> PromObjects {
-    PromObjects{
-        status: register_gauge_vec!(opts!(
-            "ecowitt_status",
-            "status infos fronm weather station",
-        ), &["type", "freq", "model"]).unwrap(),
+    PromObjects {
+        status: register_gauge_vec!(
+            opts!("ecowitt_status", "status infos fronm weather station",),
+            &["type", "freq", "model"]
+        )
+        .unwrap(),
 
-        temperature_c: register_gauge_vec!(opts!(
-            "ecowitt_temperature_celsius",
-            "temperature measurements (celsius)",
-        ), &["sensor"]).unwrap(),
-        temperature_f: register_gauge_vec!(opts!(
-            "ecowitt_temperature_fahrenheit",
-            "temperature measurements (fahrenheit)",
-        ), &["sensor"]).unwrap(),
-        pressure_pa: register_gauge_vec!(opts!(
-            "ecowitt_pressure_pascal",
-            "pressure measurements (Pa)",
-        ), &["sensor", "type"]).unwrap(),
-        pressure_inhg: register_gauge_vec!(opts!(
-            "ecowitt_pressure_inchesofmercury",
-            "pressure measurements (inHg)",
-        ), &["sensor", "type"]).unwrap(),
-        humidity: register_int_gauge_vec!(opts!(
-            "ecowitt_humidity_percents",
-            "humidity measurements (percents)",
-        ), &["sensor"]).unwrap(),
-        battery: register_gauge_vec!(opts!(
-            "ecowitt_battery_level",
-            "battery measurements",
-        ), &["sensor"]).unwrap(),
+        temperature_c: register_gauge_vec!(
+            opts!(
+                "ecowitt_temperature_celsius",
+                "temperature measurements (celsius)",
+            ),
+            &["sensor"]
+        )
+        .unwrap(),
+        temperature_f: register_gauge_vec!(
+            opts!(
+                "ecowitt_temperature_fahrenheit",
+                "temperature measurements (fahrenheit)",
+            ),
+            &["sensor"]
+        )
+        .unwrap(),
+        pressure_pa: register_gauge_vec!(
+            opts!("ecowitt_pressure_pascal", "pressure measurements (Pa)",),
+            &["sensor", "type"]
+        )
+        .unwrap(),
+        pressure_inhg: register_gauge_vec!(
+            opts!(
+                "ecowitt_pressure_inchesofmercury",
+                "pressure measurements (inHg)",
+            ),
+            &["sensor", "type"]
+        )
+        .unwrap(),
+        humidity: register_int_gauge_vec!(
+            opts!(
+                "ecowitt_humidity_percents",
+                "humidity measurements (percents)",
+            ),
+            &["sensor"]
+        )
+        .unwrap(),
+        battery: register_gauge_vec!(
+            opts!("ecowitt_battery_level", "battery measurements",),
+            &["sensor"]
+        )
+        .unwrap(),
 
-        wind_direction: register_int_gauge_vec!(opts!(
-            "ecowitt_wind_direction_degrees",
-            "wind direction (degrees)",
-        ), &["sensor"]).unwrap(),
-        wind_speed_kmph: register_gauge_vec!(opts!(
-            "ecowitt_wind_speed_kilometersperhour",
-            "wind speed (km/hour)",
-        ), &["type"]).unwrap(),
-        wind_speed_mph: register_gauge_vec!(opts!(
-            "ecowitt_wind_speed_milesperhour",
-            "wind speed (miles/hour)",
-        ), &["type"]).unwrap(),
+        wind_direction: register_int_gauge_vec!(
+            opts!("ecowitt_wind_direction_degrees", "wind direction (degrees)",),
+            &["sensor"]
+        )
+        .unwrap(),
+        wind_speed_kmph: register_gauge_vec!(
+            opts!(
+                "ecowitt_wind_speed_kilometersperhour",
+                "wind speed (km/hour)",
+            ),
+            &["type"]
+        )
+        .unwrap(),
+        wind_speed_mph: register_gauge_vec!(
+            opts!("ecowitt_wind_speed_milesperhour", "wind speed (miles/hour)",),
+            &["type"]
+        )
+        .unwrap(),
 
-        solar_radiation_wm2: register_gauge_vec!(opts!(
-            "ecowitt_solar_radiation_wattspersquaremeter",
-            "solar radiation (watts/square meter)",
-        ), &["sensor"]).unwrap(),
-        uv_index: register_int_gauge_vec!(opts!(
-            "ecowitt_uv_index",
-            "UV index",
-        ), &["sensor"]).unwrap(),
+        solar_radiation_wm2: register_gauge_vec!(
+            opts!(
+                "ecowitt_solar_radiation_wattspersquaremeter",
+                "solar radiation (watts/square meter)",
+            ),
+            &["sensor"]
+        )
+        .unwrap(),
+        uv_index: register_int_gauge_vec!(opts!("ecowitt_uv_index", "UV index",), &["sensor"])
+            .unwrap(),
 
-        rainfall_rate_inh: register_gauge_vec!(opts!(
-            "ecowitt_rainfall_rate_inchesperhour",
-            "current rainfall rate (inches/hour)",
-        ), &["sensor"]).unwrap(),
-        rainfall_rate_mmh: register_gauge_vec!(opts!(
-            "ecowitt_rainfall_rate_milimetersperhour",
-            "current rainfall rate (milimeters/hour)",
-        ), &["sensor"]).unwrap(),
-        rainfall_in: register_gauge_vec!(opts!(
-            "ecowitt_rainfall_inches",
-            "rainfall depth (inches)",
-        ), &["period"]).unwrap(),
-        rainfall_mm: register_gauge_vec!(opts!(
-            "ecowitt_rainfall_milimeters",
-            "rainfall depth (milimeters)",
-        ), &["period"]).unwrap(),
+        rainfall_rate_inh: register_gauge_vec!(
+            opts!(
+                "ecowitt_rainfall_rate_inchesperhour",
+                "current rainfall rate (inches/hour)",
+            ),
+            &["sensor"]
+        )
+        .unwrap(),
+        rainfall_rate_mmh: register_gauge_vec!(
+            opts!(
+                "ecowitt_rainfall_rate_milimetersperhour",
+                "current rainfall rate (milimeters/hour)",
+            ),
+            &["sensor"]
+        )
+        .unwrap(),
+        rainfall_in: register_gauge_vec!(
+            opts!("ecowitt_rainfall_inches", "rainfall depth (inches)",),
+            &["period"]
+        )
+        .unwrap(),
+        rainfall_mm: register_gauge_vec!(
+            opts!("ecowitt_rainfall_milimeters", "rainfall depth (milimeters)",),
+            &["period"]
+        )
+        .unwrap(),
     }
 }

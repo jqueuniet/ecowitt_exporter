@@ -1,11 +1,12 @@
-mod sensors;
-mod protocols;
 mod prom;
+mod protocols;
+mod sensors;
 
-#[macro_use] extern crate rocket;
+#[macro_use]
+extern crate rocket;
 
-use rocket::State;
 use rocket::form::Form;
+use rocket::State;
 
 use prometheus::{Encoder, TextEncoder};
 
@@ -36,7 +37,7 @@ fn ecowitt_report(
 
 #[launch]
 fn rocket() -> _ {
-    rocket::build().
-        manage(prom::new()).
-        mount("/", routes![index, metrics, ecowitt_report])
+    rocket::build()
+        .manage(prom::new())
+        .mount("/", routes![index, metrics, ecowitt_report])
 }
