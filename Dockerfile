@@ -13,4 +13,14 @@ ENV ROCKET_ADDRESS=0.0.0.0
 
 COPY --from=builder /usr/local/cargo/bin/ecowitt_exporter /usr/local/bin/
 
+RUN adduser \
+    --quiet \
+    --system \
+    --no-create-home \
+    --group \
+    --disabled-password \
+    exporter
+
+USER exporter
+
 ENTRYPOINT ["ecowitt_exporter"]
