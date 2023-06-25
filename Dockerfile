@@ -9,6 +9,8 @@ LABEL org.opencontainers.image.source="https://github.com/jqueuniet/ecowitt_expo
 LABEL org.opencontainers.image.description="Republish metrics sent with the Ecowitt weather station protocol to the prometheus format "
 LABEL org.opencontainers.image.licenses="AGPL"
 
+ENV ROCKET_ADDRESS=0.0.0.0
+
 COPY --from=builder /usr/local/cargo/bin/ecowitt_exporter /usr/local/bin/
 
 ENTRYPOINT ["ecowitt_exporter"]
