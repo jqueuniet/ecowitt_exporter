@@ -10,10 +10,10 @@ pub fn update_sensor_gauges(report: &Form<Report<'_>>, prom: &State<PromObjects>
     match report.rainratein {
         Some(rate) => {
             prom.rainfall_rate_inh
-                .with_label_values(&["exterior"])
+                .with_label_values(&["outdoor"])
                 .set(rate);
             prom.rainfall_rate_mmh
-                .with_label_values(&["exterior"])
+                .with_label_values(&["outdoor"])
                 .set(length_in_to_mm(rate));
         }
         _ => {

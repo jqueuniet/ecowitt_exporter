@@ -9,19 +9,17 @@ pub fn update_sensor_gauges(report: &Form<Report<'_>>, prom: &State<PromObjects>
     // Temperature
     match report.tempf {
         Some(temp) => {
-            prom.temperature_f
-                .with_label_values(&["exterior"])
-                .set(temp);
+            prom.temperature_f.with_label_values(&["outdoor"]).set(temp);
             prom.temperature_c
-                .with_label_values(&["exterior"])
+                .with_label_values(&["outdoor"])
                 .set(temp_f_to_c(temp));
         }
         _ => {
             prom.temperature_f
-                .remove_label_values(&["exterior"])
+                .remove_label_values(&["outdoor"])
                 .unwrap_or(());
             prom.temperature_c
-                .remove_label_values(&["exterior"])
+                .remove_label_values(&["outdoor"])
                 .unwrap_or(());
         }
     };
@@ -29,11 +27,11 @@ pub fn update_sensor_gauges(report: &Form<Report<'_>>, prom: &State<PromObjects>
     // Humidity
     match report.humidity {
         Some(hum) => {
-            prom.humidity.with_label_values(&["exterior"]).set(hum);
+            prom.humidity.with_label_values(&["outdoor"]).set(hum);
         }
         _ => {
             prom.humidity
-                .remove_label_values(&["exterior"])
+                .remove_label_values(&["outdoor"])
                 .unwrap_or(());
         }
     };
@@ -41,9 +39,7 @@ pub fn update_sensor_gauges(report: &Form<Report<'_>>, prom: &State<PromObjects>
     // Wind
     match report.winddir {
         Some(dir) => {
-            prom.wind_direction
-                .with_label_values(&["exterior"])
-                .set(dir);
+            prom.wind_direction.with_label_values(&["outdoor"]).set(dir);
         }
         _ => prom.wind_direction.reset(),
     };
@@ -104,7 +100,7 @@ pub fn update_sensor_gauges(report: &Form<Report<'_>>, prom: &State<PromObjects>
     match report.solarradiation {
         Some(rad) => {
             prom.solar_radiation_wm2
-                .with_label_values(&["exterior"])
+                .with_label_values(&["outdoor"])
                 .set(rad);
         }
         _ => {
@@ -113,7 +109,7 @@ pub fn update_sensor_gauges(report: &Form<Report<'_>>, prom: &State<PromObjects>
     };
     match report.uv {
         Some(index) => {
-            prom.uv_index.with_label_values(&["exterior"]).set(index);
+            prom.uv_index.with_label_values(&["outdoor"]).set(index);
         }
         _ => {
             prom.uv_index.reset();

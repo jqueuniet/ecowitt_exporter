@@ -18,16 +18,16 @@ pub struct PromObjects {
     pub humidity: IntGaugeVec,
     pub battery: GenericGaugeVec<AtomicF64>,
 
-    // Exterior wind gauges
+    // Outdoor wind gauges
     pub wind_direction: IntGaugeVec,
     pub wind_speed_mph: GenericGaugeVec<AtomicF64>,
     pub wind_speed_kmph: GenericGaugeVec<AtomicF64>,
 
-    // Exterior solar gauges
+    // Outdoor solar gauges
     pub solar_radiation_wm2: GenericGaugeVec<AtomicF64>,
     pub uv_index: IntGaugeVec,
 
-    // Exterior rain gauges
+    // Outdoor rain gauges
     pub rainfall_rate_inh: GenericGaugeVec<AtomicF64>,
     pub rainfall_rate_mmh: GenericGaugeVec<AtomicF64>,
     pub rainfall_in: GenericGaugeVec<AtomicF64>,
